@@ -1,0 +1,491 @@
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <!-- 优先使用 IE 最新版本和 Chrome -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <!-- 页面描述，不超过150个字符 -->
+    <meta name="description" content="" />
+    <!-- 页面关键词 -->
+    <meta name="keywords" content="" />
+    <!-- 网页作者 -->
+    <meta name="author" content="Mingyueyiyi@gmail.com" />
+    <!-- 搜索引擎抓取 -->
+    <meta name="robots" content="index,follow" />
+    <!-- 为移动设备添加 viewport -->
+    <!-- `width=device-width` 会导致 iPhone 5 添加到主屏后以 WebApp 全屏模式打开页面时出现黑边 http://bigc.at/ios-webapp-viewport-meta.orz -->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+
+    <!-- iOS 设备 begin -->
+    <!-- 添加到主屏后的标题（iOS 6 新增） -->
+    <meta name="apple-mobile-web-app-title" content="标题">
+    <!-- 是否启用 WebApp 全屏模式，删除苹果默认的工具栏和菜单栏 -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <!-- 添加智能 App 广告条 Smart App Banner（iOS 6+ Safari） -->
+    <meta name="apple-itunes-app" content="app-id=myAppStoreID, affiliate-data=myAffiliateData, app-argument=myURL">
+    <!-- 设置苹果工具栏颜色 -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <!-- 忽略页面中的数字识别为电话，忽略email识别 -->
+    <meta name="format-detection" content="telphone=no, email=no" />
+
+    <!-- 启用360浏览器的极速模式(webkit) -->
+    <meta name="renderer" content="webkit">
+    <!-- 避免IE使用兼容模式 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 针对手持设备优化，主要是针对一些老的不识别viewport的浏览器，比如黑莓 -->
+    <meta name="HandheldFriendly" content="true">
+    <!-- 微软的老式浏览器 -->
+    <meta name="MobileOptimized" content="320">
+    <!-- uc强制竖屏 -->
+    <meta name="screen-orientation" content="portrait">
+    <!-- QQ强制竖屏 -->
+    <meta name="x5-orientation" content="portrait">
+    <!-- UC强制全屏 -->
+    <meta name="full-screen" content="yes">
+    <!-- QQ强制全屏 -->
+    <meta name="x5-fullscreen" content="true">
+    <!-- UC应用模式 -->
+    <meta name="browsermode" content="application">
+    <!-- QQ应用模式 -->
+    <meta name="x5-page-mode" content="app">
+    <!-- windows phone 点击无高光 -->
+    <meta name="msapplication-tap-highlight" content="no">
+
+    <!-- iOS 设备 end -->
+    <!-- Windows 8 磁贴颜色 -->
+    <meta name="msapplication-TileColor" content="#000" />
+    <!-- Windows 8 磁贴图标 -->
+    <meta name="msapplication-TileImage" content="icon.png" />
+
+    <!-- 添加 RSS 订阅 -->
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" />
+    <!-- 添加 favicon icon -->
+    <link rel="shortcut icon" type="image/ico" href="/favicon.ico" />
+    <!--polyfill，兼容旧浏览器-->
+    <!-- <script src="assets/js/polyfill.io.min.js"></script> -->
+    <script src="https://cdn.polyfill.io/v3/polyfill.min.js"></script>
+    <!-- <script src="assets/js/polyfill.min.js"></script> -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/babel-polyfill/7.10.1/polyfill.min.js"></script>
+
+    <!--markdown解析器 https://www.jianshu.com/p/549cace91e22 -->
+    <!--正则实现，代码设计不好，不易于扩展，中文支持好，性能最好-->
+    <!-- <script src="assets/js/marked.min.js"></script> -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/marked/1.1.0/marked.min.js"></script>
+    <!--正则实现，代码设计较好，易于扩展，中文支持好，性能降低-->
+    <!--<script src="https://cdn.jsdelivr.net/npm/showdown@1.9.1/dist/showdown.min.js"></script>-->
+    <!--逐字符解析，严格遵守规范，中文支持差，性能较好-->
+    <!--<script src="https://cdn.bootcdn.net/ajax/libs/markdown-it/11.0.0/markdown-it.js"></script>-->
+
+    <!-- 语法高亮库 -->
+    <!-- <script src="assets/js/highlight.min.js"></script> -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
+    <!-- <script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script> -->
+    <!-- 代码分行 -->
+    <!-- <script src="assets/js/highlightjs-line-numbers.min.js"></script> -->
+    <!--<script src="//cdn.jsdelivr.net/npm/highlightjs-line-numbers.js@2.8.0/dist/highlightjs-line-numbers.min.js"></script>-->
+
+    <!--<link href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.0.3/styles/a11y-dark.min.css" rel="stylesheet">-->
+    <!-- <link href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.0.3/styles/androidstudio.min.css" rel="stylesheet"> -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.0.3/styles/atom-one-dark.min.css" rel="stylesheet">
+
+    <!--网络请求-->
+    <!-- <script src="assets/js/axios.min.js"></script> -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
+
+    <!--MVVM框架-->
+    <!-- <script src="assets/js/vue.min.js"></script> -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.min.js"></script>
+    <!-- <script src="assets/js/vue-router.min.js"></script> -->
+    <!--<script src="https://unpkg.com/vue-router@3.3.2/dist/vue-router.min.js"></script>-->
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue-router/3.2.0/vue-router.js"></script>
+
+    <!--jquery-->
+    <!--<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+
+    <!--<link href="assets/css/normalize.css" rel="stylesheet">-->
+    <!--<link href="https://cdn.bootcdn.net/ajax/libs/normalize/8.0.1/normalize.css" rel="stylesheet">-->
+    <link href="assets/css/common.css" rel="stylesheet">
+    <!-- <link href="assets/css/article.css" rel="stylesheet"> -->
+    <!-- <link href="assets/css/app-base.css" rel="stylesheet"> -->
+    <!--<link href="assets/css/markdown2.css" rel="stylesheet">-->
+    <!--<link href="assets/css/markdown3.css" rel="stylesheet">-->
+
+    <title></title>
+    <style>
+        #app {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            
+        }
+
+        #app-body {
+            position: absolute;
+            top: 50px;
+            left: 0;
+            right: 0;
+            background-color: #e8e8e8;
+        }
+
+        #app-title-bar {
+            position: fixed;
+            font-size: 20px;
+            height: 50px;
+            line-height: 50px;
+            width: 100%;
+            background-color: #ffffff;
+            text-align: center;
+            z-index: 99;
+        }
+
+        #score-wrap {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            line-height: 60px;
+            border-radius: 50%;
+            display: inline-block;
+            top: 32px;
+            right: 0;
+            background-color: #94b983;
+            opacity:0.9;
+            z-index: 999;
+            text-align: center;
+
+        }
+
+        .card-wrap {
+            display: block;
+            background-color: #ffffff;
+            box-sizing: content-box;
+            margin: 0 0 32px 0;
+        }
+
+        .card-body {
+            top: 50px;
+            padding: 16px 16px 16px 16px;
+        }
+
+        .card-tip {
+            font-size: 12px;
+            padding: 16px 8px;
+        }
+
+        .quest-content {
+            margin: 16px 0;
+        }
+
+        .quest-option-wrap {
+            margin: 32px 0 0 0;
+        }
+
+        .quest-option-item {
+            border: 1px solid #94b983;
+            border-radius: 5px;
+            box-sizing: content-box;
+            padding: 8px 24px;
+            margin: 6px 0;
+        }
+
+        .option-select {
+            background-color: #b2c7a8;
+        }
+
+        .submit-button {
+            border: 1px solid #94b983;
+            display: inline-block;
+            padding: 6px 8px;
+            border-radius: 5px;
+            margin-top: 16px;
+            text-align: right;
+        }
+
+        .submit-button.submited {
+            display: none;
+        }
+
+        .answer-tip {
+            margin: 24px 0 0 16px;
+            margin-top: 32px;
+            display: none;
+        }
+
+        .answer-tip.submited {
+            display: block;
+        }
+
+        .error {
+            color: #cc0000;
+        }
+
+        .quest-option-item.option-select.miss {
+            background-color: #d6a164;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div id="app-title-bar">{{chapterData.title}}</div>
+        <div id="score-wrap">{{score}}分</div>
+        <div id="app-body">
+            <ul class="question-list">
+                <li v-for="(subItem,sIndex) in chapterData.subject" class="card-wrap" :ref='"elSubItem" + sIndex'>
+                    <div class="card-tip">
+                        <span>{{sIndex + 1}}/{{chapterData.subject.length}}</span>
+                        <span>{{subItem.ans.length ==1?"单选题":"多选题"}}</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="quest-content" v-html="renderQuestion(subItem)"></div>
+                        <ul class="quest-option-wrap">
+                            <li v-for="(optItem,oIndex) in subItem.opt" v-bind:class="optionItemClass(subItem,optItem)"
+                                v-on:click="optionClick($event,subItem,optItem,oIndex)">
+                                <div style="display: flex;">
+                                    <span style="flex:1;">{{optItem.code}}、{{optItem.text}}</span>
+                                    <span class="option-item-result"></span>
+                                </div>
+                            </li>
+                        </ul>
+                        <div :class="subItem.submit? 'answer-tip submited' : 'answer-tip'">答案：{{subItem.ans}}</div>
+
+                        <div style="text-align: right;">
+                            <div v-on:click="clickSubmitAnswer($event,subItem,sIndex)"
+                                :class="subItem.submit? 'submit-button submited': 'submit-button'">确定</div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <pre id="elException">{{exceptionInfo}}</pre>
+
+    </div>
+
+    <script>
+        if (!String.prototype.replaceAll) {
+            String.prototype.replaceAll = function (s1, s2) {
+                return this.split(s1).join(s2)
+            }
+        }
+
+        marked.setOptions({
+            renderer: new marked.Renderer(),
+            gfm: true,
+            tables: true,
+            breaks: false,
+            pedantic: false,
+            sanitize: false,
+            smartLists: true,
+            smartypants: false,
+            highlight: function (code, lang) {
+                if (lang && hljs.getLanguage(lang)) {
+                    return hljs.highlight(lang, code, true).value;
+                } else {
+                    return hljs.highlightAuto(code).value;
+                }
+            }
+        });
+
+        new Vue({
+            el: '#app',
+            components: {
+
+            },
+            data: {
+                "exceptionInfo": undefined,
+                "chapterData": {
+                    "title": "",
+                    "subject": []
+                },
+                "progress": -1,
+                "score":0,
+
+            },
+            created() {
+                let lastStudyChapter = localStorage.getItem("lastStudyChapter")
+                if (!lastStudyChapter) {
+                    lastStudyChapter = "chapter-1.md"
+                }
+                axios.get(`lession/${lastStudyChapter}`).then(res => {
+                    let data = res.data
+                    console.log(data)
+                    data = this.extractMarkDownToJson(data)
+                    this.progress = 0
+                    this.chapterData = data
+                    document.title = data.title
+
+                }).catch(error => {
+                    if (error.response) {
+                        this.exceptionInfo = error.response.data
+                    } else if (error.request) {
+                        this.exceptionInfo = error.request
+                    } else {
+                        this.exceptionInfo = error
+                    }
+                    console.error(error)
+                })
+            },
+            computed: {
+                optionItemClass: function () {
+                    return function (subItem, optItem) {
+                        if (optItem.select) {
+                            return 'quest-option-item option-select'
+                        }
+                        return 'quest-option-item'
+                    }
+                },
+
+            },
+            methods: {
+
+                renderQuestion: function (item) {
+                    let quesHtml = marked(item.ques)
+                    // console.log(quesHtml)
+                    // 代码分行
+                    // this.$nextTick(() => {
+                    //     let aNodes = document.querySelectorAll('a')
+                    //     let codeNodes = document.querySelectorAll('code')
+                    //     for (let i = 0; i < codeNodes.length; i++) {
+                    //         hljs.lineNumbersBlock(codeNodes[i]);
+                    //     }
+                    // })
+                    return quesHtml
+
+                },
+                computSorce: function () {
+                    let subjects = this.chapterData.subject
+                    let everyScore = 100 / subjects.length
+                    let sorce = 0
+                    for (let item of subjects) {
+                        if(!item.submit){
+                            //未提交，不计分值
+                            continue
+                        }
+                        let isRight = true
+                        console.log(item)
+                        let answerCount = 0
+                        let selectCount = 0
+                        for (let option of item.opt) {
+                            if (option.isAnswer){
+                                answerCount ++
+                            }
+                            if (option.select) {
+                                selectCount ++
+                                if (!option.isAnswer) {
+                                    isRight = false
+                                    break
+                                }
+                            }
+                        }
+                        //没有漏选。漏选不得分
+                        if (selectCount == answerCount && isRight) {
+                            sorce = sorce + everyScore
+                        }
+                    }
+                    console.log(">>>> 有bug"+sorce)
+                    return Math.round(sorce)
+                },
+                clickSubmitAnswer(event, subItem, sIndex) {
+                    subItem.submit = true
+                    // this.$nextTick(() => {
+                    let elSubItem = document.querySelectorAll("#app-body > ul > li")[sIndex]
+                    let elOptionResultList = elSubItem.querySelectorAll(' span.option-item-result')
+                    console.log(elOptionResultList)
+                    for (let i = 0; i < subItem.opt.length; i++) {
+                        let option = subItem.opt[i]
+                        let elItemResult = elOptionResultList[i]
+                        if (option.isAnswer) {
+                            if (option.select) {
+                                //选对了答案
+                                elItemResult.innerText = "✔"
+                                elItemResult.className = "option-item-result right"
+                            } else {
+                                //漏选答案
+                                elItemResult.innerText = "漏选"
+                                elItemResult.className = "option-item-result error"
+                            }
+                        } else {
+                            if (option.select) {
+                                //选错了答案
+                                elItemResult.innerText = "✘"
+                                elItemResult.className = "option-item-result error"
+                            }
+                        }
+                    }
+                    
+                    this.score = this.computSorce()
+                },
+                optionClick: function (event, subItem, item, index) {
+                    console.log(item, index)
+                    if (subItem.submit) {
+                        return
+                    }
+                    if (subItem.ans.length > 1) {
+                        //多选
+                        item.select = !item.select
+                    } else {
+                        //单选
+                        for (let i = 0; i < subItem.opt.length; i++) {
+                            let oItem = subItem.opt[i]
+                            if (oItem == item) {
+                                oItem.select = !oItem.select
+                            } else {
+                                oItem.select = false
+                            }
+                        }
+                    }
+                },
+                extractMarkDownToJson: function (mdText) {
+                    let result = {
+                        "title": "", "subject": []
+                    }
+                    mdText = mdText.trim()
+                    let title = mdText.substring(0, mdText.search("\n")).trim()
+                    if (title.startsWith("#")) {
+                        result.title = title.substring(1).trim()
+                    }
+                    mdText = mdText.replaceAll("-[question]：", "-[question]:")
+                    mdText = mdText.replaceAll("-[option]：", "-[option]:")
+                    let quesSplit = mdText.split("-[question]:")
+
+                    for (let i = 1; i < quesSplit.length; i++) {
+                        let itemText = quesSplit[i]
+                        let optSplit = itemText.split("-[option]:")
+                        // 得到ques字段
+                        let question = optSplit[0].trim()
+
+                        let optionText = optSplit[1].trim()
+                        console.log(optionText)
+                        let optionSplit = optionText.split(/答案[:：]/)
+                        //得到ans字段
+                        let answer = optionSplit[1].trim()
+
+                        optionText = optionSplit[0].trim()
+                        optionList = optionText.split("\n").filter((v, i, arr) => {
+                            if (v) return true
+                        }).map((v, i, arr) => {
+                            v = v.trim()
+                            isAns = false
+                            if (answer.search(v[0]) > -1) {
+                                isAns = true
+                            }
+                            return { "code": v[0], "text": v.substring(1).trim(), "select": false, "isAnswer": isAns }
+                        })
+                        let item = {
+                            "ques": question,
+                            "opt": optionList,
+                            "ans": answer,
+                            "submit": false
+                        }
+                        result.subject.push(item)
+                    }
+                    console.log(JSON.stringify(result))
+                    return result
+                },
+
+            },
+        })
+    </script>
+</body>
+
+</html>
