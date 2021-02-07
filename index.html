@@ -85,8 +85,8 @@
     <!--<script src="//cdn.jsdelivr.net/npm/highlightjs-line-numbers.js@2.8.0/dist/highlightjs-line-numbers.min.js"></script>-->
 
     <!--<link href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.0.3/styles/a11y-dark.min.css" rel="stylesheet">-->
-    <!-- <link href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.0.3/styles/androidstudio.min.css" rel="stylesheet"> -->
-    <link href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.0.3/styles/atom-one-dark.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.0.3/styles/androidstudio.min.css" rel="stylesheet">
+    <!-- <link href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.0.3/styles/atom-one-dark.min.css" rel="stylesheet"> -->
 
     <!--网络请求-->
     <!-- <script src="assets/js/axios.min.js"></script> -->
@@ -105,7 +105,7 @@
     <!--<link href="assets/css/normalize.css" rel="stylesheet">-->
     <!--<link href="https://cdn.bootcdn.net/ajax/libs/normalize/8.0.1/normalize.css" rel="stylesheet">-->
     <link href="assets/css/common.css" rel="stylesheet">
-    <!-- <link href="assets/css/article.css" rel="stylesheet"> -->
+    <link href="assets/css/article.css" rel="stylesheet">
     <!-- <link href="assets/css/app-base.css" rel="stylesheet"> -->
     <!--<link href="assets/css/markdown2.css" rel="stylesheet">-->
     <!--<link href="assets/css/markdown3.css" rel="stylesheet">-->
@@ -219,8 +219,8 @@
             color: #cc0000;
         }
 
-        .quest-option-item.option-select.miss {
-            background-color: #d6a164;
+        .option-item-result.miss {
+            transform: rotateY(180deg)
         }
     </style>
 </head>
@@ -237,7 +237,7 @@
                         <span>{{subItem.ans.length ==1?"单选题":"多选题"}}</span>
                     </div>
                     <div class="card-body">
-                        <div class="quest-content" v-html="renderQuestion(subItem)"></div>
+                        <div class="quest-content article-body" v-html="renderQuestion(subItem)"></div>
                         <ul class="quest-option-wrap">
                             <li v-for="(optItem,oIndex) in subItem.opt" v-bind:class="optionItemClass(subItem,optItem)"
                                 v-on:click="optionClick($event,subItem,optItem,oIndex)">
@@ -247,7 +247,10 @@
                                 </div>
                             </li>
                         </ul>
-                        <div :class="subItem.submit? 'answer-tip submited' : 'answer-tip'">答案：{{subItem.ans}}</div>
+                        <div :class="subItem.submit? 'answer-tip submited' : 'answer-tip'">
+                            <div>答案：{{subItem.ans}}</div>
+                            <div class="article-body" v-html="explainHtml(subItem.explain)"></div>
+                        </div>
 
                         <div style="text-align: right;">
                             <div v-on:click="clickSubmitAnswer($event,subItem,sIndex)"
@@ -314,7 +317,8 @@
                     this.chapterData = data
                     document.title = data.title
 
-                }).catch(error => {
+                })
+                .catch(error => {
                     if (error.response) {
                         this.exceptionInfo = error.response.data
                     } else if (error.request) {
@@ -334,11 +338,18 @@
                         return 'quest-option-item'
                     }
                 },
+                explainHtml:function(){
+                    return function(explain){
+                        console.log(">>>>>explain")
+                        return marked(explain)
+                    }
+                }
 
             },
             methods: {
 
                 renderQuestion: function (item) {
+                    console.log(">>>>>question")
                     let quesHtml = marked(item.ques)
                     // console.log(quesHtml)
                     // 代码分行
@@ -385,6 +396,7 @@
                     console.log(">>>> 有bug"+sorce)
                     return Math.round(sorce)
                 },
+
                 clickSubmitAnswer(event, subItem, sIndex) {
                     subItem.submit = true
                     // this.$nextTick(() => {
@@ -401,8 +413,8 @@
                                 elItemResult.className = "option-item-result right"
                             } else {
                                 //漏选答案
-                                elItemResult.innerText = "漏选"
-                                elItemResult.className = "option-item-result error"
+                                elItemResult.innerText = "✎"
+                                elItemResult.className = "option-item-result miss"
                             }
                         } else {
                             if (option.select) {
@@ -457,9 +469,18 @@
                         let optionText = optSplit[1].trim()
                         console.log(optionText)
                         let optionSplit = optionText.split(/答案[:：]/)
-                        //得到ans字段
-                        let answer = optionSplit[1].trim()
-
+                        //解析答案
+                        let multAnswer = optionSplit[1].trim()
+                        let ansEndIndex = multAnswer.search('\n')
+                        let answer = multAnswer
+                        let explainText = ""
+                        if(ansEndIndex > 0){
+                            answer = multAnswer.substring(0,ansEndIndex)
+                            if(ansEndIndex<multAnswer.length){
+                                explainText = multAnswer.substring(ansEndIndex+1)
+                            }
+                        }
+                        
                         optionText = optionSplit[0].trim()
                         optionList = optionText.split("\n").filter((v, i, arr) => {
                             if (v) return true
@@ -475,7 +496,8 @@
                             "ques": question,
                             "opt": optionList,
                             "ans": answer,
-                            "submit": false
+                            "submit": false,
+                            "explain":explainText
                         }
                         result.subject.push(item)
                     }
